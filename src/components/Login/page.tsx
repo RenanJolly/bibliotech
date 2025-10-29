@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-hot-toast';
+import { HiMail, HiLockClosed, HiArrowRight } from 'react-icons/hi';
 
 // Schema de validação com Yup
 const loginSchema = yup.object({
@@ -13,7 +14,6 @@ const loginSchema = yup.object({
     .required('Email é obrigatório'),
   password: yup
     .string()
-    .min(6, 'Senha deve ter pelo menos 6 caracteres')
     .required('Senha é obrigatória'),
 });
 
@@ -33,7 +33,7 @@ export default function LoginComponent() {
       // Simular chamada de API
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      toast.success('Login realizado com sucesso!');
+      toast.success('Bem-vindo de volta à Bibliotech!');
       console.log('Dados do login:', data);
     } catch (error) {
       toast.error('Erro ao fazer login. Tente novamente.');
@@ -41,112 +41,174 @@ export default function LoginComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-bege-claro via-bege-muito-claro to-bege-principal flex items-center justify-center p-4 relative">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={{
+      background: 'linear-gradient(to bottom right, #f7ead9, #e1d2a9, #f7ead9)'
+    }}>
       {/* Padrão de madeira sutil */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
           backgroundImage: `repeating-linear-gradient(
             45deg,
             transparent,
             transparent 2px,
-            rgba(139, 115, 85, 0.1) 2px,
-            rgba(139, 115, 85, 0.1) 4px
+            rgba(103, 89, 78, 0.1) 2px,
+            rgba(103, 89, 78, 0.1) 4px
           )`
         }}></div>
       </div>
 
-      {/* Elementos decorativos modernos */}
-      <div className="absolute top-20 left-20 w-72 h-72 bg-linear-to-br from-dourado/20 to-transparent rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-linear-to-tl from-marrom-papel/15 to-transparent rounded-full blur-3xl"></div>
+      {/* Elementos decorativos modernos com nova paleta */}
+      <div className="absolute top-20 left-20 w-72 h-72 rounded-full blur-3xl" style={{
+        background: 'linear-gradient(to bottom right, rgba(136, 180, 153, 0.2), transparent)'
+      }}></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full blur-3xl" style={{
+        background: 'linear-gradient(to top left, rgba(97, 152, 133, 0.15), transparent)'
+      }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl" style={{
+        background: 'linear-gradient(to right, rgba(103, 89, 78, 0.1), rgba(136, 180, 153, 0.1))'
+      }}></div>
 
-      <div className="relative bg-white/80 backdrop-blur-xl border border-bege-principal/30 rounded-3xl shadow-2xl p-12 w-full max-w-md">
-        {/* Logo moderno */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-dourado to-dourado-escuro rounded-2xl mb-6 shadow-lg">
-            <span className="text-3xl">📚</span>
-          </div>
-          <h1 className="text-3xl font-bold bg-linear-to-r from-marrom-escuro to-marrom-papel bg-clip-text text-transparent mb-3">
-            Bibliotech
-          </h1>
-          <p className="text-marrom-papel/80 text-sm font-medium">
-            Sua biblioteca digital moderna
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-semibold text-marrom-escuro">
-              Email
-            </label>
-            <div className="relative">
-              <input
-                {...register('email')}
-                type="email"
-                id="email"
-                className={`w-full px-4 py-4 bg-white/70 backdrop-blur-sm border rounded-2xl focus:outline-none focus:ring-2 transition-all duration-300 ${
-                  errors.email
-                    ? 'border-red-400 focus:ring-red-200 focus:border-red-500'
-                    : 'border-bege-principal/50 focus:ring-dourado/30 focus:border-dourado'
-                }`}
-                placeholder="seu@email.com"
-              />
-              <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-transparent via-white/10 to-transparent pointer-events-none"></div>
+      {/* Container principal com layout dividido */}
+      <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden" style={{
+        border: '1px solid rgba(225, 210, 169, 0.3)'
+      }}>
+        <div className="flex min-h-[600px]">
+          {/* Painel esquerdo - Welcome */}
+          <div className="flex-1 p-12 flex flex-col justify-center relative" style={{
+            background: 'linear-gradient(to bottom right, #619885, #88b499, #67594e)'
+          }}>
+            {/* Elementos decorativos abstratos */}
+            <div className="absolute top-8 left-8 w-16 h-16 bg-white/20 rounded-full blur-sm"></div>
+            <div className="absolute bottom-8 right-8 w-24 h-24 bg-white/15 rounded-full blur-md"></div>
+            <div className="absolute top-1/2 right-8 w-12 h-12 bg-white/25 rounded-full blur-sm"></div>
+            
+            {/* Formas geométricas */}
+            <div className="absolute top-16 right-16 w-8 h-8 border-2 border-white/30 rounded-full"></div>
+            <div className="absolute bottom-16 left-16 w-6 h-6 bg-white/20 rounded-sm rotate-45"></div>
+            <div className="absolute top-1/3 left-12 w-4 h-4 bg-white/30 rounded-full"></div>
+            
+            <div className="relative z-10">
+              <h1 className="text-3xl font-bold text-white mb-6 leading-tight">
+                Olá, seja bem-vindo!
+              </h1>
+              <p className="text-white/90 text-lg leading-relaxed">
+                Faça login para acessar sua biblioteca pessoal e descobrir novos livros incríveis.
+              </p>
             </div>
-            {errors.email && (
-              <p className="text-sm text-red-600 font-medium">{errors.email.message}</p>
-            )}
           </div>
 
-          <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-semibold text-marrom-escuro">
-              Senha
-            </label>
-            <div className="relative">
-              <input
-                {...register('password')}
-                type="password"
-                id="password"
-                className={`w-full px-4 py-4 bg-white/70 backdrop-blur-sm border rounded-2xl focus:outline-none focus:ring-2 transition-all duration-300 ${
-                  errors.password
-                    ? 'border-red-400 focus:ring-red-200 focus:border-red-500'
-                    : 'border-bege-principal/50 focus:ring-dourado/30 focus:border-dourado'
-                }`}
-                placeholder="Sua senha"
-              />
-              <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-transparent via-white/10 to-transparent pointer-events-none"></div>
+          {/* Painel direito - Formulário */}
+          <div className="flex-1 p-12 flex flex-col justify-center">
+            <div className="max-w-sm mx-auto w-full">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-2" style={{ color: '#67594e' }}>Entrar</h2>
+                <p className="text-sm" style={{ color: 'rgba(103, 89, 78, 0.7)' }}>Acesse sua conta Bibliotech</p>
+              </div>
+
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="email" className="block text-sm font-semibold" style={{ color: '#67594e' }}>
+                    Email
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <HiMail className="h-5 w-5" style={{ color: '#4a3c2a' }} />
+                    </div>
+                    <input
+                      {...register('email')}
+                      type="email"
+                      id="email"
+                      className={`w-full pl-12 pr-4 py-4 border rounded-2xl focus:outline-none focus:ring-2 transition-all duration-300 ${
+                        errors.email
+                          ? 'border-red-400 focus:ring-red-200 focus:border-red-500'
+                          : 'border-gray-300 focus:ring-orange-300 focus:border-orange-700'
+                      }`}
+                      style={{
+                        backgroundColor: 'rgba(247, 234, 217, 0.9)',
+                        borderColor: errors.email ? '#f87171' : 'rgba(225, 210, 169, 0.5)'
+                      }}
+                      placeholder="seu@email.com"
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="text-sm text-red-600 font-medium">{errors.email.message}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="password" className="block text-sm font-semibold" style={{ color: '#67594e' }}>
+                    Senha
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <HiLockClosed className="h-5 w-5" style={{ color: '#4a3c2a' }} />
+                    </div>
+                    <input
+                      {...register('password')}
+                      type="password"
+                      id="password"
+                      className={`w-full pl-12 pr-4 py-4 border rounded-2xl focus:outline-none focus:ring-2 transition-all duration-300 ${
+                        errors.password
+                          ? 'border-red-400 focus:ring-red-200 focus:border-red-500'
+                          : 'border-gray-300 focus:ring-orange-300 focus:border-orange-700'
+                      }`}
+                      style={{
+                        backgroundColor: 'rgba(247, 234, 217, 0.9)',
+                        borderColor: errors.password ? '#f87171' : 'rgba(225, 210, 169, 0.5)'
+                      }}
+                      placeholder="Sua senha"
+                    />
+                  </div>
+                  {errors.password && (
+                    <p className="text-sm text-red-600 font-medium">{errors.password.message}</p>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center">
+                    <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-200" />
+                    <span className="ml-2 text-sm" style={{ color: '#67594e' }}>Lembrar de mim</span>
+                  </label>
+                  <a href="#" className="text-sm transition-colors" style={{ color: '#619885' }} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#88b499'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#619885'}>
+                    Esqueceu a senha?
+                  </a>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-[1.02] disabled:transform-none relative overflow-hidden group hover:opacity-90"
+                  style={{
+                    background: '#619885'
+                  }}
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        Entrando...
+                      </>
+                    ) : (
+                      <>
+                        Entrar
+                        <HiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                </button>
+              </form>
+
+              <div className="mt-8 text-center">
+                <p className="text-sm" style={{ color: 'rgba(103, 89, 78, 0.7)' }}>
+                  Novo aqui?{' '}
+                  <a href="#" className="font-semibold transition-colors" style={{ color: '#619885' }} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#88b499'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#619885'}>
+                    Criar uma Conta
+                  </a>
+                </p>
+              </div>
             </div>
-            {errors.password && (
-              <p className="text-sm text-red-600 font-medium">{errors.password.message}</p>
-            )}
           </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-linear-to-r from-dourado via-dourado-escuro to-marrom-papel hover:from-dourado-escuro hover:via-marrom-papel hover:to-marrom-escuro text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-[1.02] disabled:transform-none relative overflow-hidden group"
-          >
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              {isSubmitting ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Entrando...
-                </>
-              ) : (
-                <>
-                  Entrar
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </>
-              )}
-            </span>
-            <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          </button>
-        </form>
-
-        {/* Elemento decorativo moderno */}
-        <div className="mt-8 flex justify-center">
-          <div className="w-24 h-px bg-linear-to-r from-transparent via-bege-principal to-transparent"></div>
         </div>
       </div>
     </div>
