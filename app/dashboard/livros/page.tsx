@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-//CARROSSEL//
+// ================= CARROSSEL =================
 
 function CarrosselEmprestimos() {
   const carrosselRef = useRef<HTMLDivElement>(null);
@@ -81,10 +81,11 @@ function CarrosselEmprestimos() {
   );
 }
 
-// LISTA DE LIVROS //
+// ================= LISTA DE LIVROS =================
 
 function ListaLivros() {
   const [busca, setBusca] = useState("");
+  const [ordenarPor, setOrdenarPor] = useState("");
 
   const livros = [
     { id: 1, titulo: "O Senhor dos Anéis", autor: "Tolkien", categoria: "Fantasia", paginas: 1200 },
@@ -97,33 +98,55 @@ function ListaLivros() {
     { id: 8, titulo: "A Metamorfose", autor: "Franz Kafka", categoria: "Ficção", paginas: 201 },
     { id: 9, titulo: "O Grande Gatsby", autor: "F. Scott Fitzgerald", categoria: "Romance", paginas: 180 },
     { id: 10, titulo: "Moby Dick", autor: "Herman Melville", categoria: "Aventura", paginas: 635 },
-    
-
   ];
 
+  // FILTRO PELO TÍTULO
   const livrosFiltrados = livros.filter((livro) =>
     livro.titulo.toLowerCase().includes(busca.toLowerCase())
   );
+
+  // ORDENAR
+  const livrosOrdenados = [...livrosFiltrados];
+
+  if (ordenarPor === "titulo") {
+    livrosOrdenados.sort((a, b) => a.titulo.localeCompare(b.titulo));
+  } else if (ordenarPor === "paginas") {
+    livrosOrdenados.sort((a, b) => a.paginas - b.paginas);
+  }
 
   return (
     <div className="max-w-6xl mx-auto mt-10">
       <h2 className="text-3xl font-bold text-primary mb-6">Lista de Livros</h2>
 
-    <input
+      {/* BUSCA */}
+      <input
         type="text"
         placeholder="Buscar livro por título..."
         className="w-full p-3 mb-4 rounded bg-white/20 border border-white/30 
-             text-gray-900 placeholder-gray-700"
+        text-gray-900 placeholder-gray-700"
         value={busca}
         onChange={(e) => setBusca(e.target.value)}
-          />
- 
-     
+      />
 
+      {/* ORDENAR */}
+      <div className="flex justify-end mb-4">
+        <select
+          value={ordenarPor}
+            onChange={(e) => setOrdenarPor(e.target.value)}
+              className="p-3 rounded bg-white/20 border border-white/30 text-gray-900">                                                                           
+                <option value="">Ordenar...</option>
+                <option value="titulo">Título (A–Z)</option>
+                <option value="paginas">Número de páginas</option>
+              </select>
+            </div>
+
+
+      {/* TABELA */}
       <div className="overflow-x-auto shadow-lg rounded-lg">
         <table className="w-full border-collapse bg-white/10 backdrop-blur-md rounded-lg">
           <thead>
-            <tr className="bg-primary text-white">
+            <tr className="w-full p-3 mb-4 rounded bg-white/20 border border-white/30 
+                          text-gray-900 placeholder-gray-700">
               <th className="p-3 text-left">Título</th>
               <th className="p-3 text-left">Autor</th>
               <th className="p-3 text-left">Categoria</th>
@@ -133,8 +156,9 @@ function ListaLivros() {
           </thead>
 
           <tbody>
-            {livrosFiltrados.map((livro) => (
-              <tr key={livro.id} className="hover:bg-primary/20 transition border-b border-white/10">
+            {livrosOrdenados.map((livro) => (
+              <tr key={livro.id} className="w-full p-3 mb-4 rounded bg-white/20 border border-white/30 
+                                            text-gray-900 placeholder-gray-700">
                 <td className="p-3">{livro.titulo}</td>
                 <td className="p-3">{livro.autor}</td>
                 <td className="p-3">{livro.categoria}</td>
@@ -152,13 +176,14 @@ function ListaLivros() {
               </tr>
             ))}
 
-            {livrosFiltrados.length === 0 && (
+            {livrosOrdenados.length === 0 && (
               <tr>
-             <td colSpan={5} className="p-4 text-center text-gray-700 italic">
-                 Nenhum livro encontrado.
+                <td colSpan={5} className="p-4 text-center text-gray-700 italic">
+                  Nenhum livro encontrado.
                 </td>
               </tr>
             )}
+
           </tbody>
         </table>
       </div>
@@ -166,7 +191,7 @@ function ListaLivros() {
   );
 }
 
-// DEFAULT PAGE //
+// ================= PÁGINA FINAL =================
 
 export default function PageLivros() {
   return (
