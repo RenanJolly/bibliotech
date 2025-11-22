@@ -220,7 +220,7 @@ export default function LoginComponent() {
               <div className="mt-8 text-center">
                 <p className="text-sm" style={{ color: 'rgba(103, 89, 78, 0.7)' }}>
                   Novo aqui?{' '}
-                  <a href="#" className="font-semibold transition-colors" style={{ color: '#619885' }} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#88b499'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#619885'}>
+                  <a href="registro/" className="font-semibold transition-colors" style={{ color: '#619885' }} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#88b499'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#619885'}>
                     Criar uma Conta
                   </a>
                 </p>
