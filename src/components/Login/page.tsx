@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -7,6 +9,7 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { HiMail, HiLockClosed, HiArrowRight } from 'react-icons/hi';
 import { useAuth } from '@/contexts/AuthContext';
+import Loading from '@/components/Loading';
 
 const loginSchema = yup.object({
   email: yup
@@ -23,6 +26,7 @@ type LoginFormData = yup.InferType<typeof loginSchema>;
 export default function LoginComponent() {
   const router = useRouter();
   const { login } = useAuth();
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -50,17 +54,18 @@ export default function LoginComponent() {
       success: (result) => {
         if (result?.access_token) {
           login(result.access_token);
+          setIsRedirecting(true);
+            router.push('/inicio');
         }
-        
-        setTimeout(() => {
-          router.push('/');
-        }, 1000);
-        
-        return 'Bem-vindo de volta à Bibliotech!';
+        return '';
       },
       error: (error) => error.message,
     });
   };
+
+  if (isRedirecting) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={{
@@ -88,9 +93,15 @@ export default function LoginComponent() {
         background: 'linear-gradient(to right, rgba(103, 89, 78, 0.1), rgba(136, 180, 153, 0.1))'
       }}></div>
 
-      <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden" style={{
-        border: '1px solid rgba(225, 210, 169, 0.3)'
-      }}>
+      <motion.div 
+        className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden" 
+        style={{
+          border: '1px solid rgba(225, 210, 169, 0.3)'
+        }}
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+      >
         <div className="flex min-h-[600px]">
           <div className="flex-1 p-12 flex flex-col justify-center relative" style={{
             background: 'linear-gradient(to bottom right, #619885, #88b499, #67594e)'
@@ -225,7 +236,7 @@ export default function LoginComponent() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
